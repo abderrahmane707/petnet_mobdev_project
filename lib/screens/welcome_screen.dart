@@ -26,11 +26,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   // Slides 2 and 3 use placeholder copy. Edit freely.
   static const _slides = [
-    _Slide('assets/images/rami.jpg', 'A home is waiting',
+    _Slide('assets/images/rami.png', 'A home is waiting',
         'Discover loving animals near you, ready for their second chance.'),
-    _Slide('assets/images/felfel.jpg', 'Every request counts',
+    _Slide('assets/images/felfel.png', 'Every request counts',
         'Send a thoughtful message and meet them in a safe, simple way.'),
-    _Slide('assets/images/mina.jpg', 'A caring community',
+    _Slide('assets/images/mina.png', 'A caring community',
         "Shelters, vets and animal lovers across Algeria, together."),
   ];
 
