@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../data/dummy_animals.dart';
+import '../data/mock_data.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../models/animal.dart';
@@ -10,6 +12,9 @@ import '../widgets/coming_soon.dart';
 import '../widgets/petnet_logo.dart';
 import '../widgets/round_icon_button.dart';
 import 'animals_in_need_screen.dart';
+import 'adopter_profile_screen.dart';
+import 'owner_profile_screen.dart';
+import 'shelter_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,10 +30,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _chip = 'All';
 
+  Widget _profileForRole() {
+    switch (selectedUserRole.toLowerCase()) {
+      case 'owner':
+        return const OwnerProfileScreen();
+      case 'shelter':
+        return const ShelterProfileScreen();
+      default:
+        return const AdopterProfileScreen();
+    }
+  }
+
   void _onTab(int i) {
-    if (i == 0) return;
-    // TODO(B): replace with the real tab routes once routes.dart is ready.
-    comingSoon(context, const ['Home', 'Search', 'Saved', 'Requests', 'Profile'][i]);
+    if (i == 0) return; // Already on Home
+
+    if (i == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => _profileForRole()),
+      );
+      return;
+    }
+
+    comingSoon(
+      context,
+      const ['Home', 'Search', 'Saved', 'Requests', 'Profile'][i],
+    );
   }
 
   @override
@@ -38,10 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final nearby = nearbyAnimals.where((a) => a.matchesChip(_chip)).toList();
 
     return Scaffold(
-      bottomNavigationBar: PetNetBottomNavBar(
-        currentIndex: 0,
-        onTap: _onTab,
-      ),
+      bottomNavigationBar: PetNetBottomNavBar(currentIndex: 0, onTap: _onTab),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.only(top: 12, bottom: 12),
@@ -75,12 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Good morning, $_userName',
-                      style: theme.textTheme.headlineMedium),
+                  Text(
+                    'Good morning, $_userName',
+                    style: theme.textTheme.headlineMedium,
+                  ),
                   const SizedBox(height: 10),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.surface,
                       borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -89,8 +117,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.location_on_outlined,
-                            size: 14, color: AppColors.brown),
+                        const Icon(
+                          Icons.location_on_outlined,
+                          size: 14,
+                          color: AppColors.brown,
+                        ),
                         const SizedBox(width: 4),
                         Text('Oran', style: theme.textTheme.labelMedium),
                       ],
@@ -117,17 +148,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.search, size: 20, color: AppColors.brown),
+                      const Icon(
+                        Icons.search,
+                        size: 20,
+                        color: AppColors.brown,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           'Search animals, shelters, vets',
-                          style: theme.textTheme.bodyMedium
-                              ?.copyWith(color: AppColors.textHint),
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: AppColors.textHint,
+                          ),
                         ),
                       ),
-                      const Icon(Icons.filter_alt_outlined,
-                          size: 20, color: AppColors.brown),
+                      const Icon(
+                        Icons.filter_alt_outlined,
+                        size: 20,
+                        color: AppColors.brown,
+                      ),
                     ],
                   ),
                 ),
@@ -161,7 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 onSeeAll: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (_) => const AnimalsInNeedScreen()),
+                    builder: (_) => const AnimalsInNeedScreen(),
+                  ),
                 ),
               ),
             ),

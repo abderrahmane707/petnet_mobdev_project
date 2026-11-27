@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import '../data/dummy_animals.dart';
+import '../data/mock_data.dart';
 import '../widgets/animal_card.dart';
 import '../widgets/app_chip.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/coming_soon.dart';
 import '../widgets/round_icon_button.dart';
 import '../models/animal.dart';
+import 'adopter_profile_screen.dart';
+import 'owner_profile_screen.dart';
+import 'shelter_profile_screen.dart';
+
 
 class AnimalsInNeedScreen extends StatefulWidget {
   const AnimalsInNeedScreen({super.key});
@@ -18,12 +23,29 @@ class _AnimalsInNeedScreenState extends State<AnimalsInNeedScreen> {
   static const _chips = ['All', 'Dogs', 'Cats', 'Injured'];
   String _chip = 'All';
 
+  Widget _profileForRole() {
+    switch (selectedUserRole.toLowerCase()) {
+      case 'owner':
+        return const OwnerProfileScreen();
+      case 'shelter':
+        return const ShelterProfileScreen();
+      default:
+        return const AdopterProfileScreen();
+    }
+  }
+
   void _onTab(int i) {
     if (i == 0) {
       Navigator.popUntil(context, (route) => route.isFirst);
       return;
     }
-    // TODO(B): replace with the real tab routes once routes.dart is ready.
+    if (i == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => _profileForRole()),
+      );
+      return;
+    }
     comingSoon(context, const ['Home', 'Search', 'Saved', 'Requests', 'Profile'][i]);
   }
 
