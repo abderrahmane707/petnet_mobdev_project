@@ -6,6 +6,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/round_icon_button.dart';
 import 'home_screen.dart';
+import 'login_screen.dart';
 
 class _Role {
   final String title;
@@ -170,7 +171,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   Text('Already have an account?',
                       style: theme.textTheme.bodyMedium),
                   TextButton(
-                    onPressed: () => Navigator.maybePop(context),
+                    onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    ),
                     child: const Text('Sign in'),
                   ),
                 ],

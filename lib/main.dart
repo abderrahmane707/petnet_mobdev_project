@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'theme/app_theme.dart';
-import 'screens/components_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() => runApp(const PetNetApp());
 
@@ -13,7 +13,7 @@ class PetNetApp extends StatelessWidget {
       title: 'PetNet',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const ComponentsScreen(),
+      home: const SplashScreen(),
     );
   }
 }

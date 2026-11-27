@@ -3,7 +3,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/petnet_logo.dart';
-import 'login_screen.dart';
+import 'signup_screen.dart';
 
 class _Slide {
   final String image;
@@ -124,7 +124,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 label: 'Get started',
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
+                  MaterialPageRoute(builder: (_) => const SignupScreen()),
                 ),
               ),
             ],
