@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import '../widgets/coming_soon.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/petnet_logo.dart';
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => comingSoon(context, 'Password reset'),
                   child: const Text('Forgot password?'),
                 ),
               ),
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text('New to PetNet?', style: theme.textTheme.bodyMedium),
                   TextButton(
-                    onPressed: () => Navigator.push(
+                    onPressed: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (_) => const SignupScreen()),
                     ),

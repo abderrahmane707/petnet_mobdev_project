@@ -21,7 +21,7 @@ const List<Animal> kAnimals = [
   Animal(
     id: 'felfel',
     name: 'Felfel',
-    species: 'Dog',
+    species: 'Cat',
     sex: 'Male',
     size: 'Small',
     ageLabel: '8 months',
